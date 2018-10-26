@@ -29,7 +29,7 @@ class Register_model extends CI_Model {
 			'estado' => $this->input->post('estado')
 		);
 
-		if($insert)
+		if($insert) 
 			$endereco_insert = $this->db->insert('enderecos', $endereco);
 
 		return $endereco_insert;

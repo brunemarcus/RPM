@@ -49,19 +49,19 @@
 						</div>
 						<div class="form-group">
 							<label><b class="require">* </b>Rua</label>
-							<input type="text" name="rua" id="rua" class="form-control">
+							<input type="text" name="rua" id="rua" class="form-control" disabled>
 						</div>
 						<div class="form-group">
 							<label><b class="require">* </b>Bairro</label>
-							<input type="text" name="bairro" id="bairro" class="form-control">
+							<input type="text" name="bairro" id="bairro" class="form-control" disabled>
 						</div>
 						<div class="form-group">
 							<label><b class="require">* </b>Cidade</label>
-							<input type="text" name="cidade" id="cidade" class="form-control">
+							<input type="text" name="cidade" id="cidade" class="form-control" disabled>
 						</div>
 						<div class="form-group">
 							<label><b class="require">* </b> Estado</label>
-							<input type="text" name="estado" id="estado" class="form-control">
+							<input type="text" name="estado" id="estado" class="form-control" disabled>
 						</div>
 						<div class="form-group">
 							<label><b class="require">* </b> Telefone</label>
@@ -88,6 +88,12 @@
 										$("#bairro").val(value.bairro);
 										$("#cidade").val(value.localidade);
 										$("#estado").val(value.uf);
+
+										//Disable Inputs
+										$("#rua").prop('disabled',false);
+										$("#bairro").prop('disabled',false);
+										$("#cidade").prop('disabled',false);
+										$("#estado").prop('disabled',false);
 									})
 								},
 								error: function(e) {
