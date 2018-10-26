@@ -44,6 +44,26 @@
 							<input type="password" name="confsenha" class="form-control">
 						</div>
 						<div class="form-group">
+							<label><b class="require">* </b>CEP</label>
+							<input type="text" name="cep" id="cep" class="form-control">
+						</div>
+						<div class="form-group">
+							<label><b class="require">* </b>Rua</label>
+							<input type="text" name="rua" id="rua" class="form-control">
+						</div>
+						<div class="form-group">
+							<label><b class="require">* </b>Bairro</label>
+							<input type="text" name="bairro" id="bairro" class="form-control">
+						</div>
+						<div class="form-group">
+							<label><b class="require">* </b>Cidade</label>
+							<input type="text" name="cidade" id="cidade" class="form-control">
+						</div>
+						<div class="form-group">
+							<label><b class="require">* </b> Estado</label>
+							<input type="text" name="estado" id="estado" class="form-control">
+						</div>
+						<div class="form-group">
 							<label><b class="require">* </b> Telefone</label>
 							<input type="text" name="telefone" id="telefone" class="form-control">
 						</div>
@@ -55,8 +75,29 @@
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</div>
 					</form>
+					<script type="text/javascript">
+						$("#cep").mask('00000-000');
+						$("#cep").blur(function(){
+							var cep = $("#cep").val();
+							$.ajax({
+								type:"GET",
+								url: "https://viacep.com.br/ws/"+cep+"/json/",
+								success: function(data) {
+									$(data).each(function(index,value){
+										$("#rua").val(value.logradouro);
+										$("#bairro").val(value.bairro);
+										$("#cidade").val(value.localidade);
+										$("#estado").val(value.uf);
+									})
+								},
+								error: function(e) {
+									console.log(e);
+								}
+							})
+						})
+					</script>
 				</div>
 			</div>
 		</div>
 	</body>
-</html>
+	</html>

@@ -28,6 +28,10 @@ $(document).ready(function(){
 					minlength: 6,
 					equalTo: "#senha"
 				},
+				'cep': {
+					required: true,
+					minlength: 8
+				},
 				'telefone': {
 					required: true,
 					regex: /^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/

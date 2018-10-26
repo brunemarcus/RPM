@@ -18,6 +18,7 @@ class Home extends CI_Controller {
 		$this->form_validation->set_rules('email','Email', 'required|valid_email');
 		$this->form_validation->set_rules('senha','Senha', 'required|min_length[6]');
 		$this->form_validation->set_rules('confsenha', 'Confsenha', 'required|min_length[6]|matches[senha]');
+		$this->form_validation->set_rules('cep', 'Cep', 'required');
 		$this->form_validation->set_rules('telefone', 'Telefone', 'required');
 		$this->form_validation->set_rules('rg', 'Rg', 'required');
 
