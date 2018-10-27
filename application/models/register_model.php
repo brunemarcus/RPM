@@ -3,23 +3,24 @@
 class Register_model extends CI_Model {
 
 	public function __construct()
-    {
-    	parent::__construct();
-    	$this->load->database();
-    }
+	{
+		parent::__construct();
+		$this->load->database();
+	}
 
 	public function insert() {
-		$data = array(
+		/* Table User */
+		$data = array( 
 			'nome' => $this->input->post('nome'),
 			'email' => $this->input->post('email'),
 			'senha' => md5($this->input->post('senha')),
 			'telefone' => $this->input->post('telefone'),			
 			'rg' => $this->input->post('rg')
 		);
-
-		$insert = $this->db->insert('user', $data);
+		$this->db->trans_begin();
+		$this->db->insert('user', $data);
 		$last_id = $this->db->insert_id();
-
+		/* Table Endereços */
 		$endereco = array(
 			'id_user' => $last_id,
 			'cep' => $this->input->post('cep'),
@@ -28,10 +29,12 @@ class Register_model extends CI_Model {
 			'cidade' => $this->input->post('cidade'),
 			'estado' => $this->input->post('estado')
 		);
+		$this->db->insert('enderecos', $endereco);
 
-		if($insert) 
-			$endereco_insert = $this->db->insert('enderecos', $endereco);
-
-		return $endereco_insert;
+		if($this->db->trans_status() === FALSE) 
+			return $this->db->trans_rollback();
+		else {
+			return $this->db->trans_commit();
+		}
 	}
 }
